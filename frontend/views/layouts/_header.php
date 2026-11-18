@@ -19,7 +19,7 @@ $items = [
 
         [
                 'label' => 'Partidas & Chegadas',
-                'url' => ['/partidas/index'],
+                'url' => ['/partida-chegada/index'],
         ],
         [
                 'label' => 'Check-In',
