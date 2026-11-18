@@ -13,7 +13,7 @@ use yii\helpers\Html;
     <div class="container">
         <div class="footer-grid d-flex justify-content-between w-100">
             <div>
-                <a href="index.html" class="logo">
+                <a href="<?= Yii::$app->homeUrl?>" class="logo">
           <span class="logo-mark">
             <svg
                     viewBox="0 0 24 24"
