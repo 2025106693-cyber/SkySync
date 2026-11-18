@@ -4,7 +4,9 @@ namespace frontend\controllers;
 
 use common\models\Passageiro;
 use frontend\models\PassageiroSearch;
+use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -91,15 +93,25 @@ class PassageiroController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if(!Yii::$app->user->can('editarDadosPassageiro')){
+            throw new ForbiddenHttpException("Não tem acesso.");
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        // Proteção para garantir que o passageiro veja apenas o seu perfil
+        if(Yii::$app->user->id == $id ) {
+            $model = $this->findModel($id);
+
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException();
+        }
+
     }
 
     /**

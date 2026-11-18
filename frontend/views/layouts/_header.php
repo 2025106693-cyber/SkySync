@@ -28,13 +28,13 @@ $items = [
 
         [
                 'label' => 'Os meus bilhetes',
-                'url' => ['/bilhete/index'],
+                'url' => ['/bilhete/index'],   // Foi alterado no BilheteSearch()  'passageiro_id' => Yii::$app->user->id
                 'visible' => !$user->isGuest,
         ],
 
         [
                 'label' => 'Perfil',
-                'url' => ['/passageiro/index'],
+                'url' => ['/passageiro/update', 'id' => Yii::$app->user->id], // chama o PassageiroController ->ActionUpdate($id)
                 'visible' => !$user->isGuest,
         ],
 

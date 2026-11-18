@@ -22,9 +22,9 @@ class RbacController extends Controller
         // PERMISSÕES — PASSAGEIRO (Front-Office e App mobile) //
 
         // CRUD dados pessoais
-        $inserirDadosPassageiro = $auth->createPermission('verDadosPassageiro');
-        $inserirDadosPassageiro->description = 'Ver os dados pessoais';
-        $auth->add($inserirDadosPassageiro);
+        $verDadosPassageiro = $auth->createPermission('verDadosPassageiro');
+        $verDadosPassageiro->description = 'Ver os dados pessoais';
+        $auth->add($verDadosPassageiro);
 
         $adicionarDadosPassageiro = $auth->createPermission('adicionarDadosPassageiro');
         $adicionarDadosPassageiro->description = 'Adicionar os dados pessoais';
@@ -304,7 +304,7 @@ class RbacController extends Controller
         $passageiro = $auth->createRole('passageiro');
         $passageiro->description = 'Passageiro';
         $auth->add($passageiro);
-        $auth->addChild($passageiro, $inserirDadosPassageiro);
+        $auth->addChild($passageiro, $verDadosPassageiro);
         $auth->addChild($passageiro, $adicionarDadosPassageiro);
         $auth->addChild($passageiro, $editarDadosPassageiro);
         $auth->addChild($passageiro, $apagarDadosPassageiro);
