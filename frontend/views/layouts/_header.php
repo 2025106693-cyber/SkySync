@@ -34,7 +34,7 @@ $items = [
 
         [
                 'label' => 'Perfil',
-                'url' => ['/bilhete/index'],
+                'url' => ['/passageiro/index'],
                 'visible' => !$user->isGuest,
         ],
 
