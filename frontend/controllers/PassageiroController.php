@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Passageiro;
+use common\models\User;
 use frontend\models\PassageiroSearch;
 use Yii;
 use yii\web\Controller;
@@ -91,15 +92,20 @@ class PassageiroController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id) //este id é o id do user autenticado ou seja da tabela user
     {
-        if(!Yii::$app->user->can('editarDadosPassageiro')){
+        if (!Yii::$app->user->can('editarDadosPassageiro')){
             throw new ForbiddenHttpException("Não tem acesso.");
         }
+        $user = User::findOne($id);
+        // a linha de baixo usa a relação com o user para saber
+        // qual o id da tabela passageiro a partir do parametro id da função actionView
+        $idPassageiro = $user->passageiro->id;
 
         // Proteção para garantir que o passageiro veja apenas o seu perfil
-        if(Yii::$app->user->id == $id ) {
-            $model = $this->findModel($id);
+        if (Yii::$app->user->id == $user->passageiro->user_id) {
+
+            $model = $this->findModel($idPassageiro);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

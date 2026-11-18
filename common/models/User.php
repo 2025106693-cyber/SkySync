@@ -150,9 +150,9 @@ class User extends ActiveRecord implements IdentityInterface
 
 
     // estamos a dar a relação 1:1 na tabela
-    public function getPassageiro() : ActiveQuery
+    public function getPassageiro(): ActiveQuery
     {
-        return $this->hasOne(Passageiro::class, ['id' => 'user_id']);
+        return $this->hasOne(Passageiro::class, ['user_id' => 'id']);
     }
 
 
