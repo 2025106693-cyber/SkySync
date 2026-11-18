@@ -94,8 +94,8 @@ class PassageiroController extends Controller
      */
     public function actionUpdate($id) //este id é o id do user autenticado ou seja da tabela user
     {
-        if (!Yii::$app->user->can('editarDadosPassageiro')){
-            throw new ForbiddenHttpException("Não tem acesso.");
+        if (!Yii::$app->user->can('editarDadosPassageiro')) {
+            throw new ForbiddenHttpException('Não tem acesso.');
         }
         $user = User::findOne($id);
         // a linha de baixo usa a relação com o user para saber
@@ -104,7 +104,6 @@ class PassageiroController extends Controller
 
         // Proteção para garantir que o passageiro veja apenas o seu perfil
         if (Yii::$app->user->id == $user->passageiro->user_id) {
-
             $model = $this->findModel($idPassageiro);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -114,10 +113,9 @@ class PassageiroController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
-        }else{
+        } else {
             throw new ForbiddenHttpException();
         }
-
     }
 
     /**
