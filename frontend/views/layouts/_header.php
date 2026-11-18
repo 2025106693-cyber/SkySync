@@ -14,7 +14,7 @@ $user = Yii::$app->user;
 $items = [
         [
                 'label' => 'Voos',
-                'url' => ['/voos/index'],
+                'url' => ['/voo/index'],
         ],
 
         [
