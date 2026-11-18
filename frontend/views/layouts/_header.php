@@ -32,6 +32,12 @@ $items = [
                 'visible' => !$user->isGuest,
         ],
 
+        [
+                'label' => 'Perfil',
+                'url' => ['/bilhete/index'],
+                'visible' => !$user->isGuest,
+        ],
+
 ];
 
 // Botões da direita
