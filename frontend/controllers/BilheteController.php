@@ -4,7 +4,9 @@ namespace frontend\controllers;
 
 use common\models\Bilhete;
 use frontend\models\BilheteSearch;
+use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -38,13 +40,15 @@ class BilheteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new BilheteSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        //if(Yii::$app->user->can('verBilhetes')) {
+            $searchModel = new BilheteSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        //}
     }
 
     /**
@@ -55,9 +59,15 @@ class BilheteController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model =  $this->findModel($id);
+
+        if (Yii::$app->user->can('verBilhetes', ['bilhete' => $model])) {
+            return $this->render('view', [
+                'model' => $model,
+            ]);
+        } else {
+            throw new ForbiddenHttpException();
+        }
     }
 
     /**

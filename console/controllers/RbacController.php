@@ -51,10 +51,7 @@ class RbacController extends Controller
         $auth->add($apagarBilheteProprio);
         */
 
-        $verBilheteProprio = $auth->createPermission('verBilhetesProprio');
-        $verBilheteProprio->description = 'Consultar os seus bilhetes e o histórico de viagens';
-        $verBilheteProprio->ruleName = $regraDono->name;
-        $auth->add($verBilheteProprio);
+
 
         $exportarBilheteProprio = $auth->createPermission('exportarBilheteProprio');
         $exportarBilheteProprio->description = 'Exportar o bilhete';
@@ -182,11 +179,17 @@ class RbacController extends Controller
         $auth->add($apagarEscalas);
 
 
-
+        // ter sempre o pai e o filho, ex: editarBilhetes e editarBilhetesPropio
         // CRUD - BILHETES
         $verBilhetes = $auth->createPermission('verBilhetes');
         $verBilhetes->description = 'Ver bilhetes vendidos e passageiros com check-in de um voo';
         $auth->add($verBilhetes);
+
+        $verBilheteProprio = $auth->createPermission('verBilhetesProprio');
+        $verBilheteProprio->description = 'Consultar os seus bilhetes e o histórico de viagens';
+        $verBilheteProprio->ruleName = $regraDono->name;
+        $auth->add($verBilheteProprio);
+        $auth->addChild($verBilheteProprio, $verBilhetes);
 
         $editarBilhetes = $auth->createPermission('editarBilhetes');
         $editarBilhetes->description = 'Editar qualquer bilhete';

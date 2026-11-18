@@ -1,6 +1,7 @@
 <?php
 namespace common\rbac;
 
+use Yii;
 use yii\rbac\Rule;
 use common\models\Passageiro;
 
@@ -17,15 +18,16 @@ class DonoBilheteRule extends Rule
         if (!isset($params['bilhete'])) {
             return false;
         }
+
+
         $bilhete = $params['bilhete'];
 
-        // Se o bilhete guardar quem o comprou (necessário para os acompanhantes)
-        if ($bilhete->hasAttribute('user_id')) {
-            return (int) $bilhete->user_id === (int) $user;
-        }
 
-        // Caso contrário: o passageiro do bilhete tem de ser o do utilizador
-        $passageiro = Passageiro::findOne(['user_id' => $user]);
-        return $passageiro !== null && (int) $bilhete->passageiro_id === (int) $passageiro->id;
+        // Se o bilhete guardar quem o comprou (necessário para os acompanhantes)
+        if ($bilhete->hasAttribute('passageiro_id')) {
+            $passageiro = Passageiro::findOne(['user_id' => $user]);
+
+            return $passageiro !== null && $bilhete->passageiro_id == $passageiro->id;
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace common\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -149,9 +150,9 @@ class User extends ActiveRecord implements IdentityInterface
 
 
     // estamos a dar a relação 1:1 na tabela
-    public function getPassageiro()
+    public function getPassageiro() : ActiveQuery
     {
-        return $this->hasOne(Passageiro::class, ['user_id' => 'id']);
+        return $this->hasOne(Passageiro::class, ['id' => 'user_id']);
     }
 
 

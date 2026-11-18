@@ -44,4 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <!--  ver mais tarde, lista de escalas de cada voo  -->
+    <?php //foreach ($model->escalas as $escala){ ?>
+    <p><?php //echo $escala->hora_chegada ?></p>
+    <?php //} ?>
+
 </div>

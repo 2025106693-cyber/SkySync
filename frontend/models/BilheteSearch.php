@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Passageiro;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -59,10 +60,11 @@ class BilheteSearch extends Bilhete
             return $dataProvider;
         }
 
+        $passageiro = Passageiro::findOne(['user_id' => Yii::$app->user->id]);
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'passageiro_id' => Yii::$app->user->id,   // para garantir que é o utilizador logado
+            'passageiro_id' => $passageiro->id,   // para garantir que é o utilizador logado
             'voo_id' => $this->voo_id,
             'preco_total' => $this->preco_total,
             'check_in' => $this->check_in,
