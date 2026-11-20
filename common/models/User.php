@@ -231,4 +231,9 @@ class User extends ActiveRecord implements IdentityInterface
         $this->status = self::STATUS_DELETED;
         return $this->save(false);
     }
+
+    public function getAssignments()
+    {
+        return $this->hasMany(AuthAssignment::class, ['user_id' => 'id']);
+    }
 }

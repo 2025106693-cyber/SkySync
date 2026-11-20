@@ -44,6 +44,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
 
                 ],
+            [
+                    'attribute' => 'role_name',
+                    'label' => 'Cargos',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                    $roles = Yii::$app->authManager
+                    ->getRolesByUser($model->id);
+                    $badges = array_map(function($role) {
+                    return Html::tag('span', $role->name, [
+                    'class' => 'label label-primary'
+                    ]);
+                    }, $roles);
+                    return implode(' ', $badges);
+                    },
+                    'filter' => ['admin' => 'Admin', 'gestor' => 'Gestor', 'passageiro' => 'Passageiro'],
+                    'filterInputOptions' => ['class' => 'form-control', 'prompt' => 'Todos'],
+                ],
             //'created_at',
             //'updated_at',
             //'verification_token',
