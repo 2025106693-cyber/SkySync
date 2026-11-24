@@ -49,12 +49,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Cargos',
                     'format' => 'raw',
                     'value' => function($model) {
-                    $roles = Yii::$app->authManager
-                    ->getRolesByUser($model->id);
-                    $badges = array_map(function($role) {
-                    return Html::tag('span', $role->name, [
-                    'class' => 'label label-primary'
-                    ]);
+                        $roles = Yii::$app->authManager->getRolesByUser($model->id);
+
+                    // aray de cores para cada role
+                    $cores = [
+                            'admin' => 'badge badge-danger',      // vermelho
+                            'gestor' => 'badge badge-primary',    // azul
+                            'passageiro' => 'badge badge-secondary',   // cinzento
+                    ];
+
+                    $badges = array_map(function($role) use ($cores) {
+                        return Html::tag('span', ucfirst($role->name),
+                                [
+                                        'class' => $cores[$role->name]
+                                ]);
                     }, $roles);
                     return implode(' ', $badges);
                     },
