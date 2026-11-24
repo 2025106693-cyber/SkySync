@@ -115,12 +115,18 @@ class UserController extends Controller
 
 
             // atualizar o cargo (vem da dropdown "role" do _form)
-            $auth = Yii::$app->authManager;
-            $auth->revokeAll($model->id);
-            $auth->assign($auth->getRole($this->request->post('role')), $model->id);
+            if($model->id != Yii::$app->user->id){
+
+                $auth = Yii::$app->authManager;
+                $auth->revokeAll($model->id); // apaga todos os cargos do id escolhido
+                $auth->assign($auth->getRole($this->request->post('role')), $model->id);  // guarda o novo cargo
+            }
+            else {  // perguntar à stora como imprimir o erro
+                Yii::$app->session->setFlash('error', 'Não é possível alterar o seu próprio cargo');
+            }
 
 
-            return $this->redirect(['index', 'id' => $model->id]); // no fim da alteracao envia para o index
+           return $this->redirect(['index', 'id' => $model->id]); // no fim da alteracao envia para o index
         }
 
         return $this->render('update', [

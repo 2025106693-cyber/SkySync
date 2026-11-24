@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     <!-- cargo (fica na tabela auth_assignment, por isso não é um field do model) -->
     <div class="form-group">
         <label class="control-label">Cargo</label>
-
+                                <!-- array_key_first o cargo atual do utilizador -->
         <?= Html::dropDownList('role', array_key_first(Yii::$app->authManager->getRolesByUser($model->id)), [
                 'admin' => 'Admin',
                 'gestor' => 'Gestor',
