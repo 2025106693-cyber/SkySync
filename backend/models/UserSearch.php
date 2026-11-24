@@ -11,6 +11,8 @@ use common\models\User;
  */
 class UserSearch extends User
 {
+    // Novo atributo safe
+    public $role_name;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'role_name'], 'safe'],
         ];
     }
 
@@ -42,7 +44,7 @@ class UserSearch extends User
     public function search($params, $formName = null)
     {
         //Exclui todos os utilizadores que tiverem o status deleted
-        $query = User::find()->where(['!=', 'status', User::STATUS_DELETED]);
+        $query = User::find()->where(['!=', 'user.status', User::STATUS_DELETED]);
 
         // add conditions that should always apply here
 
@@ -57,6 +59,12 @@ class UserSearch extends User
             // $query->where('0=1');
             return $dataProvider;
         }
+
+        // Usamos a relação mapeada previamento no User.php
+        $query->joinWith('assignments');
+        $query->andFilterWhere([
+            'auth_assignment.item_name' => $this->role_name,
+        ]);
 
         // grid filtering conditions
         $query->andFilterWhere([
