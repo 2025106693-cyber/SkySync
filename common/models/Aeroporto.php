@@ -75,19 +75,15 @@ class Aeroporto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getVoos()
+
+    public function getVoosDestino()
     {
         return $this->hasMany(Voo::class, ['aeroporto_destino_id' => 'id']);
     }
-
-    /**
-     * Gets query for [[Voos0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVoos0()
+    public function getVoosOrigem()
     {
         return $this->hasMany(Voo::class, ['aeroporto_origem_id' => 'id']);
     }
+
 
 }

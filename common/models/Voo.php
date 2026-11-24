@@ -231,4 +231,5 @@ class Voo extends \yii\db\ActiveRecord
     {
         $this->estado = self::ESTADO_CANCELADO;
     }
+
 }

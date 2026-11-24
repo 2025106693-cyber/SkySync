@@ -1,134 +1,112 @@
 <?php
-$this->title = 'Starter Page';
+
+use common\models\CompanhiaAerea;
+use common\models\User;
+use common\models\Aeroporto;
+use common\models\Voo;
+use common\models\Bilhete;
+use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
+
+
+$this->title = 'Administração';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
+
+$username = Yii::$app->user->identity->username;
+$role = array_key_first(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id));
+$auth = Yii::$app->authManager;
+
+$voos = Voo::find()->orderBy('hora_chegada')->all();
+
+
 ?>
 <div class="container-fluid">
+
+
+
     <div class="row">
-        <div class="col-lg-6">
-            <?= \hail812\adminlte\widgets\Alert::widget([
-                'type' => 'success',
-                'body' => '<h3>Congratulations!</h3>',
+        <div class="col-12">
+            <h3>Bem vindo, <?= Html::encode($username) ?>!</h3>
+        </div>
+    </div>
+
+    <!-- Pessoas -->
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= \hail812\adminlte\widgets\InfoBox::widget([
+                    'text' => 'Utilizadores do Sistema',
+                    'number' => User::find()->count(),
+                    'icon' => 'fas fa-users',
             ]) ?>
-            <?= \hail812\adminlte\widgets\Callout::widget([
-                'type' => 'danger',
-                'head' => 'I am a danger callout!',
-                'body' => 'There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.'
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= \hail812\adminlte\widgets\InfoBox::widget([
+                    'text' => 'Gestores Operacionais',
+                    'number' => count($auth->getUserIdsByRole('gestor')),
+                    'theme' => 'success',
+                    'icon' => 'fas fa-user-tie',
+            ]) ?>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= \hail812\adminlte\widgets\InfoBox::widget([
+                    'text' => 'Passageiros',
+                    'number' => count($auth->getUserIdsByRole('passageiro')),
+                    'theme' => 'info',
+                    'icon' => 'fas fa-user',
             ]) ?>
         </div>
     </div>
 
+    <!-- Operação -->
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-md-4 col-sm-6 col-12">
             <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'CPU Traffic',
-                'number' => '10 <small>%</small>',
-                'icon' => 'fas fa-cog',
+                    'text' => 'Companhias Aéreas',
+                    'number' => CompanhiaAerea::find()->count(),
+                    'icon' => 'fas fa-plane',
             ]) ?>
         </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= \hail812\adminlte\widgets\InfoBox::widget([
+                    'text' => 'Voos',
+                    'number' => Voo::find()->count(),
+                    'theme' => 'warning',
+                    'icon' => 'fas fa-plane-departure',
+            ]) ?>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= \hail812\adminlte\widgets\InfoBox::widget([
+                    'text' => 'Bilhetes Vendidos',
+                    'number' => Bilhete::find()->count(),
+                    'theme' => 'danger',
+                    'icon' => 'fas fa-ticket-alt',
+            ]) ?>
+        </div>
+
     </div>
 
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Messages',
-                'number' => '1,410',
-                'icon' => 'far fa-envelope',
-            ]) ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Bookmarks',
-                'number' => '410',
-                 'theme' => 'success',
-                'icon' => 'far fa-flag',
-            ]) ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Uploads',
-                'number' => '13,648',
-                'theme' => 'gradient-warning',
-                'icon' => 'far fa-copy',
-            ]) ?>
-        </div>
-    </div>
+    <h3>Voos</h3>
 
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Bookmarks',
-                'number' => '41,410',
-                'icon' => 'far fa-bookmark',
-                'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ]
-            ]) ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?php $infoBox = \hail812\adminlte\widgets\InfoBox::begin([
-                'text' => 'Likes',
-                'number' => '41,410',
-                'theme' => 'success',
-                'icon' => 'far fa-thumbs-up',
-                'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ]
-            ]) ?>
-            <?= \hail812\adminlte\widgets\Ribbon::widget([
-                'id' => $infoBox->id.'-ribbon',
-                'text' => 'Ribbon',
-            ]) ?>
-            <?php \hail812\adminlte\widgets\InfoBox::end() ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Events',
-                'number' => '41,410',
-                'theme' => 'gradient-warning',
-                'icon' => 'far fa-calendar-alt',
-                'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ],
-                'loadingStyle' => true
-            ]) ?>
-        </div>
-    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Voo</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Partida</th>
+            <th>Chegada</th>
+            <th>Estado</th>
+        </tr>
 
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'New Orders',
-                'icon' => 'fas fa-shopping-cart',
-            ]) ?>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <?php $smallBox = \hail812\adminlte\widgets\SmallBox::begin([
-                'title' => '150',
-                'text' => 'New Orders',
-                'icon' => 'fas fa-shopping-cart',
-                'theme' => 'success'
-            ]) ?>
-            <?= \hail812\adminlte\widgets\Ribbon::widget([
-                'id' => $smallBox->id.'-ribbon',
-                'text' => 'Ribbon',
-                'theme' => 'warning',
-                'size' => 'lg',
-                'textSize' => 'lg'
-            ]) ?>
-            <?php \hail812\adminlte\widgets\SmallBox::end() ?>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '44',
-                'text' => 'User Registrations',
-                'icon' => 'fas fa-user-plus',
-                'theme' => 'gradient-success',
-                'loadingStyle' => true
-            ]) ?>
-        </div>
-    </div>
+        <?php foreach ($voos as $voo): ?>
+            <tr>
+                <td><?= $voo->numero ?></td>
+                <td><?= $voo->aeroportoDestino->nome ?></td>
+                <td><?= $voo->aeroportoOrigem->nome ?></td>
+                <td><?= $voo->hora_partida ?></td>
+                <td><?= $voo->hora_chegada ?></td>
+                <td><?= $voo->estado ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
 </div>
