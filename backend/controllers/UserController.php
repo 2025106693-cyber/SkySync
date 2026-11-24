@@ -112,6 +112,14 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+
+            // atualizar o cargo (vem da dropdown "role" do _form)
+            $auth = Yii::$app->authManager;
+            $auth->revokeAll($model->id);
+            $auth->assign($auth->getRole($this->request->post('role')), $model->id);
+
+
             return $this->redirect(['index', 'id' => $model->id]); // no fim da alteracao envia para o index
         }
 

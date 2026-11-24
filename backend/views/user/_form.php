@@ -19,6 +19,17 @@ use yii\widgets\ActiveForm;
         User::STATUS_INACTIVE => 'Inativo',
     ]) ?>
 
+    <!-- cargo (fica na tabela auth_assignment, por isso não é um field do model) -->
+    <div class="form-group">
+        <label class="control-label">Cargo</label>
+
+        <?= Html::dropDownList('role', array_key_first(Yii::$app->authManager->getRolesByUser($model->id)), [
+                'admin' => 'Admin',
+                'gestor' => 'Gestor',
+                'passageiro' => 'Passageiro',
+        ], ['class' => 'form-control']) ?>
+    </div>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
