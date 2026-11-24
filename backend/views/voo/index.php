@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'numero',
-            'aviao_id',
-            'aeroporto_origem_id',
-            'aeroporto_destino_id',
+            'aviao.modelo:text:Avião',
+                'aeroportoOrigem.nome:text:Origem',
+                'aeroportoDestino.nome:text:Destino',
             //'hora_partida',
             //'hora_chegada',
             //'hora_partida_prevista',
