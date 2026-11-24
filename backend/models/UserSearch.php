@@ -11,6 +11,7 @@ use common\models\User;
  */
 class UserSearch extends User
 {
+    // Novo atributo safe
     public $role_name;
     /**
      * {@inheritdoc}
@@ -59,7 +60,7 @@ class UserSearch extends User
             return $dataProvider;
         }
 
-        // Meto dado na aula teorica
+        // Usamos a relação mapeada previamento no User.php
         $query->joinWith('assignments');
         $query->andFilterWhere([
             'auth_assignment.item_name' => $this->role_name,

@@ -232,6 +232,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
+    // Relação da tabela auth_assigment com o user usada no UserSearch
     public function getAssignments()
     {
         return $this->hasMany(AuthAssignment::class, ['user_id' => 'id']);
