@@ -18,6 +18,9 @@ $auth = Yii::$app->authManager;
 
 $voos = Voo::find()->orderBy('hora_chegada')->all();
 
+//Recarrega a página de 3 em 3 segundos para atualizar os dados;
+$this->registerMetaTag(['http-equiv' => 'refresh', 'content' => '3']);
+
 
 ?>
 <div class="container-fluid">
