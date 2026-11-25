@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'data_check_in',
             [
                 'class' => ActionColumn::className(),
-                'template' => '{view} {update}',
+                //'template' => '{view} {update}',
                 'urlCreator' => function ($action, Bilhete $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
