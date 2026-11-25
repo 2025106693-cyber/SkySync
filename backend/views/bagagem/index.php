@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'peso',
-                'filter' => false,
+                'filter' => false, // o false tira as caixas de cima
                 'value' => function ($model) {
                     return $model->peso . " kg";
                 }
@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'preco',
                 'label' => 'Preço',
-                'filter' => false,
+                'filter' => false, // o false tira as caixas de cima
                 'value' => function ($model) {
                     return $model->preco . " €";
                 }
