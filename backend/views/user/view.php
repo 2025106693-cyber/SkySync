@@ -16,14 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="user-view">
 
-    <h1><?= Html::encode($model->username) ?></h1>
-
 
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'username',
             'email:email',
             'created_at:datetime:Criado em',
