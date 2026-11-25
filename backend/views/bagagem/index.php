@@ -17,6 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bagagem-index">
 
+    <p>
+        <?= Html::a('Criar Bagagem', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

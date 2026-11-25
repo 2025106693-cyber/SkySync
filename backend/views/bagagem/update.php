@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /** @var common\models\Bagagem $model */
 
 $this->title = "Bagagem do bilhete: " . $model->bilhete->numero;
-$this->params['breadcrumbs'][] = ['label' => 'Bagagems', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => 'Bagagens', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="bagagem-update">
 

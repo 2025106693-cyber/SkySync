@@ -16,11 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="aviao-index">
 
 
-
-    <p>
-        <?= Html::a('Criar Avião', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
