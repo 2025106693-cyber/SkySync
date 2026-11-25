@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-
+<!--
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-
+-->
     <!--  ver mais tarde, lista de escalas de cada voo  -->
     <?php //foreach ($model->escalas as $escala){ ?>
     <p><?php //echo $escala->hora_chegada ?></p>
