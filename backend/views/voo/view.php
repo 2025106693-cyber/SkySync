@@ -29,11 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'numero',
-            'aviao_id',
-            'aeroporto_origem_id',
-            'aeroporto_destino_id',
+            'aviao.modelo:text:Modelo',
+            'aeroportoOrigem.nome:text:Origem',
+            'aeroportoDestino.nome:text:Destino',
             'hora_partida',
             'hora_chegada',
             'hora_partida_prevista',

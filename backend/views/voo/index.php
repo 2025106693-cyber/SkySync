@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="voo-index">
 
-    
+
 
     <p>
         <?= Html::a('Criar Voo', ['create'], ['class' => 'btn btn-success']) ?>
