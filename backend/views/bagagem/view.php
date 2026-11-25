@@ -6,22 +6,20 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Bagagem $model */
 
-$this->title = $model->id;
+$this->title = "Bagagem do bilhete: " . $model->bilhete->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Bagagens', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="bagagem-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'bilhete_id',
-            'tipo_bagagem_id',
+            //'id',
+            'bilhete.numero:text:Número do Bilhete',
+            'tipoBagagem.nome:text:Tipo de Bagagem',
             'peso',
             'preco',
         ],
