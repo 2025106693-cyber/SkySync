@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'peso')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'preco')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'preco')->textInput(['maxlength' => true])->label('Preço') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
