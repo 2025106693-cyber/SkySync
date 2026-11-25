@@ -1,6 +1,8 @@
 <?php
 
 use common\models\Bagagem;
+use common\models\TipoBagagem;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -15,8 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bagagem-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,14 +26,32 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'bilhete_id',
-            'tipo_bagagem_id',
-            'peso',
-            'preco',
+            //'id',
+            //ver backend/models/BagagemSearch
+            [
+                'attribute' => 'bilhete_numero', // a caixa de pesquisa usa o atributo do BagagemSearch
+                'label' => 'Número do Bilhete',
+                'value' => 'bilhete.numero'     // relacao getBilhete
+            ],
+            [
+                'attribute' => 'tipo_bagagem_id',
+                'label' => 'Tipo de Bagagem',
+                'value' => 'tipoBagagem.nome',
+                // dropdown com os tipos de bagagem da BD (id => nome)
+                'filter' => ArrayHelper::map(TipoBagagem::find()->all(), 'id', 'nome'),
+                'filterInputOptions' => ['class' => 'form-control', 'prompt' => 'Todos'],
+            ],
+            [
+                'attribute' => 'peso',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'preco',
+                'label' => 'Preço',
+                'filter' => false,
+            ],
             [
                 'class' => ActionColumn::className(),
-                'template' => '{view}',
                 'urlCreator' => function ($action, Bagagem $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
