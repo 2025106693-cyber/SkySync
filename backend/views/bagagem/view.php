@@ -20,8 +20,20 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'bilhete.numero:text:Número do Bilhete',
             'tipoBagagem.nome:text:Tipo de Bagagem',
-            'peso',
-            'preco',
+            [
+                'attribute' => 'peso',
+                'label' => 'Peso',
+                'value' => function ($model) {
+                    return $model->peso . " kg";
+                }
+            ],
+            [
+                'attribute' => 'preco',
+                'label' => 'Preço',
+                'value' => function ($model) {
+                    return $model->preco . " €";
+                }
+            ],
         ],
     ]) ?>
 

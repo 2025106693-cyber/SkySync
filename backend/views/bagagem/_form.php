@@ -1,5 +1,7 @@
 <?php
 
+use common\models\TipoBagagem;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,9 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'bilhete_id')->textInput() ?>
-
-    <?= $form->field($model, 'tipo_bagagem_id')->textInput() ?>
+    <?= $form->field($model, 'tipo_bagagem_id')->dropDownList(
+            ArrayHelper::map(TipoBagagem::find()->all(), 'id', 'nome') // transforma a lista que foi buscar num array com id => nome
+    )->label('Tipo de bagagem') ?>
 
     <?= $form->field($model, 'peso')->textInput(['maxlength' => true]) ?>
 
