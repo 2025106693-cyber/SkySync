@@ -6,26 +6,26 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Bilhete $model */
 
-$this->title = $model->id;
+$this->title = "Número do Bilhete: " .  $model->numero;
 $this->params['breadcrumbs'][] = ['label' => 'Bilhetes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="bilhete-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?php //= Html::encode($model->numero) ?><!--</h1>-->
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p>
+<!--    <p>-->
+<!--        --><?php //= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+<!--    </p>-->
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'numero',
-            'passageiro_id',
-            'voo_id',
+                'passageiro.nome:text:Passageiro',
+                'voo.numero:text:Voo',
             'preco_total',
             'check_in',
             'estado',

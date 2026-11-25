@@ -15,8 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bilhete-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,10 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'numero',
-            'passageiro_id',
-            'voo_id',
+            'passageiro.nome:text:Passageiro',
+            'voo.numero:text:Voo',
             'preco_total',
             //'check_in',
             //'estado',
@@ -37,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'data_check_in',
             [
                 'class' => ActionColumn::className(),
-                'template' => '{view} {update}',
+                //'template' => '{view} {update}',
                 'urlCreator' => function ($action, Bilhete $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
