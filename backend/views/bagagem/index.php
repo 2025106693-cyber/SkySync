@@ -44,11 +44,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'peso',
                 'filter' => false,
+                'value' => function ($model) {
+                    return $model->peso . " kg";
+                }
             ],
             [
                 'attribute' => 'preco',
                 'label' => 'Preço',
                 'filter' => false,
+                'value' => function ($model) {
+                    return $model->preco . " €";
+                }
             ],
             [
                 'class' => ActionColumn::className(),
