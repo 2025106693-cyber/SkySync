@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'matricula',
             'modelo',
             'capacidade',
-            'companhia_aerea_id',
+            'companhiaAerea.nome:text:Companhia',
             'estado',
         ],
     ]) ?>
