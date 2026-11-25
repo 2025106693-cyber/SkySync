@@ -26,10 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'numero',
-            'passageiro_id',
-            'voo_id',
+            'passageiro.nome:text:Passageiro',
+            'voo.numero:text:Voo',
             'preco_total',
             //'check_in',
             //'estado',
