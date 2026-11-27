@@ -2,9 +2,9 @@
 
 Sistema de gestão de um aeroporto: voos, escalas, companhias aéreas, aviões, passageiros, bilhetes e bagagem.
 
-Projeto desenvolvido no âmbito da unidade curricular de Projeto de Sistemas de Informação (PSI) e Plataformas de Sistemas de Informação do TeSP em Programação de Sistemas de Informação — Politécnico de Leiria (ESTG), 2026/27.
+Projeto desenvolvido no âmbito da unidade curricular de Projeto de Sistemas de Informação (PSI) e Plataformas de Sistemas de Informação (PLATSI) do TeSP em Programação de Sistemas de Informação — Politécnico de Leiria (ESTG), 2026/27.
 
-> A app mobile para passageiros está em [SkySync Mobile](https://github.com/2025106693-cyber/SkySync_Mobile.git).
+> A app mobile para passageiros está em [SkySync Mobile](https://github.com/2025106693-cyber/SkySync_Mobile).
 
 ---
 
@@ -15,7 +15,7 @@ O SkySync gere a operação de **um único aeroporto com vários voos**. Permite
 - **Gestão de voos**: número, origem, destino, horários, porta de embarque, estado e preço base
 - **Escalas** de cada voo, ordenadas
 - **Companhias aéreas e aviões** (a capacidade do avião define a lotação máxima do voo)
-- **Passageiros**, identificados por passaporte ou cc
+- **Passageiros**, identificados por passaporte ou cartão de cidadão
 - **Bilhetes**: preço total = preço base do voo + itens de bagagem, e estado do check-in
 - **Aeroportos** importados de uma API externa ([airportsapi.com](https://airportsapi.com))
 - **API REST** para a aplicação mobile
@@ -44,7 +44,7 @@ Os utilizadores **nunca são eliminados**: são desativados (*soft delete*).
 - **RBAC** do Yii2 com `DbManager`
 - **API REST** (Yii2 `ActiveController`)
 - Integração com **airportsapi.com**
-- Bootstrap 5 TODO-confirmar
+- Bootstrap 5 
 
 ---
 
@@ -56,7 +56,7 @@ skysync/
 ├── frontend/    # Área pública (Passageiro, Visitante)
 ├── common/      # Modelos e configuração partilhados
 ├── console/     # Migrações e comandos (ex.: inicialização do RBAC)
-└── TODO-api/    # Módulo da API REST
+└── api/    # Módulo da API REST - Em desenvolvimento
 ```
 
 ---
@@ -73,7 +73,7 @@ skysync/
 
 ```bash
 # 1. Clonar o repositório
-git clone TODO-url-do-repo
+git clone [url-do-repositório](https://github.com/2025106693-cyber/SkySync.git)
 cd skysync
 
 # 2. Instalar dependências
@@ -103,7 +103,7 @@ php yii migrate --migrationPath=@yii/rbac/migrations
 php yii migrate
 
 # 7. Criar perfis e permissões
-php yii TODO-rbac/init
+php yii rbac/init
 ```
 
 8. Apontar o servidor web para `frontend/web` e `backend/web`.
